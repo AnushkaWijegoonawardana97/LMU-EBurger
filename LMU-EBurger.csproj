@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,23 +128,384 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUser.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EBurgerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EBurgerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EBurgerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EBurgerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDelivery.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>EBurgerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\contact.php" />
+    <Content Include="Content\assets\detail_contact.php" />
+    <Content Include="Content\assets\newsletter.php" />
+    <Content Include="Content\assets\register.php" />
+    <Content Include="Content\assets\validate.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\blog.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap_customized.css" />
+    <Content Include="Content\css\bootstrap_customized.min.css" />
+    <Content Include="Content\css\contacts.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\detail-page.css" />
+    <Content Include="Content\css\error.css" />
+    <Content Include="Content\css\help.css" />
+    <Content Include="Content\css\home.css" />
+    <Content Include="Content\css\icons.css" />
+    <Content Include="Content\css\icons.min.css" />
+    <Content Include="Content\css\icon_fonts\font\ElegantIcons.svg" />
+    <Content Include="Content\css\icon_fonts\font\food.svg" />
+    <Content Include="Content\css\icon_fonts\font\Glyphter.svg" />
+    <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\leaflet.css" />
+    <Content Include="Content\css\listing.css" />
+    <Content Include="Content\css\modal_popup.css" />
+    <Content Include="Content\css\order-sign_up.css" />
+    <Content Include="Content\css\review.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\submit.css" />
+    <Content Include="Content\css\wizard.css" />
+    <Content Include="Content\img\404.svg" />
+    <Content Include="Content\img\about_1.svg" />
+    <Content Include="Content\img\about_2.svg" />
+    <Content Include="Content\img\about_3.svg" />
+    <Content Include="Content\img\access_bg.jpg" />
+    <Content Include="Content\img\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="Content\img\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="Content\img\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="Content\img\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="Content\img\appstore.svg" />
+    <Content Include="Content\img\appstore_dark.png" />
+    <Content Include="Content\img\app_android.svg" />
+    <Content Include="Content\img\app_apple.svg" />
+    <Content Include="Content\img\arrow_about.png" />
+    <Content Include="Content\img\arrow_down.svg" />
+    <Content Include="Content\img\avatar-placeholder.jpg" />
+    <Content Include="Content\img\avatar.jpg" />
+    <Content Include="Content\img\avatar1.jpg" />
+    <Content Include="Content\img\avatar4.jpg" />
+    <Content Include="Content\img\avatar6.jpg" />
+    <Content Include="Content\img\avatar_1.svg" />
+    <Content Include="Content\img\avatar_2.svg" />
+    <Content Include="Content\img\avatar_3.svg" />
+    <Content Include="Content\img\banner_bg_desktop.jpg" />
+    <Content Include="Content\img\bg_call_section.jpg" />
+    <Content Include="Content\img\bg_call_section_2.jpg" />
+    <Content Include="Content\img\blog-1.jpg" />
+    <Content Include="Content\img\blog-2.jpg" />
+    <Content Include="Content\img\blog-3.jpg" />
+    <Content Include="Content\img\blog-4.jpg" />
+    <Content Include="Content\img\blog-5.jpg" />
+    <Content Include="Content\img\blog-6.jpg" />
+    <Content Include="Content\img\blog-single.jpg" />
+    <Content Include="Content\img\camera.svg" />
+    <Content Include="Content\img\cards_all.svg" />
+    <Content Include="Content\img\cat_listing_1.jpg" />
+    <Content Include="Content\img\cat_listing_2.jpg" />
+    <Content Include="Content\img\cat_listing_3.jpg" />
+    <Content Include="Content\img\cat_listing_4.jpg" />
+    <Content Include="Content\img\cat_listing_5.jpg" />
+    <Content Include="Content\img\cat_listing_6.jpg" />
+    <Content Include="Content\img\cat_listing_7.jpg" />
+    <Content Include="Content\img\cat_listing_8.jpg" />
+    <Content Include="Content\img\cat_listing_placeholder.png" />
+    <Content Include="Content\img\close_infobox.png" />
+    <Content Include="Content\img\credit-cards_amazon.svg" />
+    <Content Include="Content\img\credit-cards_amex.svg" />
+    <Content Include="Content\img\credit-cards_apple-pay.svg" />
+    <Content Include="Content\img\credit-cards_bitcoin.svg" />
+    <Content Include="Content\img\credit-cards_diners-club.svg" />
+    <Content Include="Content\img\credit-cards_discover.svg" />
+    <Content Include="Content\img\credit-cards_maestro.svg" />
+    <Content Include="Content\img\credit-cards_mastercard.svg" />
+    <Content Include="Content\img\credit-cards_paypal.svg" />
+    <Content Include="Content\img\credit-cards_visa.svg" />
+    <Content Include="Content\img\detail_1.jpg" />
+    <Content Include="Content\img\detail_2.jpg" />
+    <Content Include="Content\img\detail_3.jpg" />
+    <Content Include="Content\img\detail_gallery\detail_1.jpg" />
+    <Content Include="Content\img\detail_gallery\detail_2.jpg" />
+    <Content Include="Content\img\detail_gallery\detail_3.jpg" />
+    <Content Include="Content\img\detail_gallery\detail_4.jpg" />
+    <Content Include="Content\img\detail_gallery\detail_5.jpg" />
+    <Content Include="Content\img\drag_icon.svg" />
+    <Content Include="Content\img\facebook_icon.svg" />
+    <Content Include="Content\img\Facebook__logo.svg" />
+    <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\googlestore.svg" />
+    <Content Include="Content\img\googlestore_dark.png" />
+    <Content Include="Content\img\Google__G__Logo.svg" />
+    <Content Include="Content\img\hero_5.svg" />
+    <Content Include="Content\img\hero_5_mobile.svg" />
+    <Content Include="Content\img\hero_general.jpg" />
+    <Content Include="Content\img\hero_general_2.jpg" />
+    <Content Include="Content\img\hero_in_restaurants_detail.jpg" />
+    <Content Include="Content\img\hero_submit.jpg" />
+    <Content Include="Content\img\hero_submit_2.jpg" />
+    <Content Include="Content\img\home_cat_bakery.jpg" />
+    <Content Include="Content\img\home_cat_chinesse.jpg" />
+    <Content Include="Content\img\home_cat_hamburgher.jpg" />
+    <Content Include="Content\img\home_cat_mexican.jpg" />
+    <Content Include="Content\img\home_cat_pizza.jpg" />
+    <Content Include="Content\img\home_cat_placeholder.jpg" />
+    <Content Include="Content\img\home_cat_sushi.jpg" />
+    <Content Include="Content\img\home_cat_vegetarian.jpg" />
+    <Content Include="Content\img\home_section_1.jpg" />
+    <Content Include="Content\img\home_section_2.jpg" />
+    <Content Include="Content\img\how_1.svg" />
+    <Content Include="Content\img\how_2.svg" />
+    <Content Include="Content\img\how_3.svg" />
+    <Content Include="Content\img\icon_burgher_list.svg" />
+    <Content Include="Content\img\icon_ccv.gif" />
+    <Content Include="Content\img\icon_chinese_list.svg" />
+    <Content Include="Content\img\icon_submit_1.svg" />
+    <Content Include="Content\img\icon_submit_2.svg" />
+    <Content Include="Content\img\icon_submit_3.svg" />
+    <Content Include="Content\img\img_cat_home_1.jpg" />
+    <Content Include="Content\img\img_cat_home_2.jpg" />
+    <Content Include="Content\img\img_cat_home_3.jpg" />
+    <Content Include="Content\img\img_cat_home_4.jpg" />
+    <Content Include="Content\img\img_cat_home_placeholder.png" />
+    <Content Include="Content\img\instagram_icon.svg" />
+    <Content Include="Content\img\item_square_small_1.jpg" />
+    <Content Include="Content\img\lazy-placeholder-100-100-white.png" />
+    <Content Include="Content\img\lazy-placeholder-600-400.png" />
+    <Content Include="Content\img\lazy-placeholder.jpg" />
+    <Content Include="Content\img\lazy-placeholder.png" />
+    <Content Include="Content\img\location_1.jpg" />
+    <Content Include="Content\img\location_10.jpg" />
+    <Content Include="Content\img\location_11.jpg" />
+    <Content Include="Content\img\location_12.jpg" />
+    <Content Include="Content\img\location_2.jpg" />
+    <Content Include="Content\img\location_3.jpg" />
+    <Content Include="Content\img\location_3.png" />
+    <Content Include="Content\img\location_4.jpg" />
+    <Content Include="Content\img\location_5.jpg" />
+    <Content Include="Content\img\location_6.jpg" />
+    <Content Include="Content\img\location_7.jpg" />
+    <Content Include="Content\img\location_8.jpg" />
+    <Content Include="Content\img\location_9.jpg" />
+    <Content Include="Content\img\location_list_1.jpg" />
+    <Content Include="Content\img\location_list_2.jpg" />
+    <Content Include="Content\img\location_list_3.jpg" />
+    <Content Include="Content\img\location_list_4.jpg" />
+    <Content Include="Content\img\location_list_5.jpg" />
+    <Content Include="Content\img\location_list_6.jpg" />
+    <Content Include="Content\img\location_list_placeholder.png" />
+    <Content Include="Content\img\logo.svg" />
+    <Content Include="Content\img\logo_sticky.svg" />
+    <Content Include="Content\img\map-marker.png" />
+    <Content Include="Content\img\map_bt_bg.png" />
+    <Content Include="Content\img\menu-thumb-1.jpg" />
+    <Content Include="Content\img\menu-thumb-10.jpg" />
+    <Content Include="Content\img\menu-thumb-11.jpg" />
+    <Content Include="Content\img\menu-thumb-12.jpg" />
+    <Content Include="Content\img\menu-thumb-13.jpg" />
+    <Content Include="Content\img\menu-thumb-14.jpg" />
+    <Content Include="Content\img\menu-thumb-15.jpg" />
+    <Content Include="Content\img\menu-thumb-16.jpg" />
+    <Content Include="Content\img\menu-thumb-17.jpg" />
+    <Content Include="Content\img\menu-thumb-18.jpg" />
+    <Content Include="Content\img\menu-thumb-19.jpg" />
+    <Content Include="Content\img\menu-thumb-2.jpg" />
+    <Content Include="Content\img\menu-thumb-20.jpg" />
+    <Content Include="Content\img\menu-thumb-21.jpg" />
+    <Content Include="Content\img\menu-thumb-22.jpg" />
+    <Content Include="Content\img\menu-thumb-23.jpg" />
+    <Content Include="Content\img\menu-thumb-24.jpg" />
+    <Content Include="Content\img\menu-thumb-3.jpg" />
+    <Content Include="Content\img\menu-thumb-4.jpg" />
+    <Content Include="Content\img\menu-thumb-5.jpg" />
+    <Content Include="Content\img\menu-thumb-6.jpg" />
+    <Content Include="Content\img\menu-thumb-7.jpg" />
+    <Content Include="Content\img\menu-thumb-8.jpg" />
+    <Content Include="Content\img\menu-thumb-9.jpg" />
+    <Content Include="Content\img\menu-thumb-placeholder.jpg" />
+    <Content Include="Content\img\menu_item_large_1.jpg" />
+    <Content Include="Content\img\menu_item_large_2.jpg" />
+    <Content Include="Content\img\menu_item_large_3.jpg" />
+    <Content Include="Content\img\menu_item_large_4.jpg" />
+    <Content Include="Content\img\minus.png" />
+    <Content Include="Content\img\minus.svg" />
+    <Content Include="Content\img\modal_advertise.png" />
+    <Content Include="Content\img\newsletter_img.jpg" />
+    <Content Include="Content\img\pattern.svg" />
+    <Content Include="Content\img\pattern_1.svg" />
+    <Content Include="Content\img\pattern_2.svg" />
+    <Content Include="Content\img\paypal.svg" />
+    <Content Include="Content\img\paypal_2.svg" />
+    <Content Include="Content\img\pins\Marker.png" />
+    <Content Include="Content\img\pizza_cat_listing.jpg" />
+    <Content Include="Content\img\plus.png" />
+    <Content Include="Content\img\plus.svg" />
+    <Content Include="Content\img\search.svg" />
+    <Content Include="Content\img\shape_element_1.svg" />
+    <Content Include="Content\img\shape_element_2.svg" />
+    <Content Include="Content\img\slides\slide_home_1.jpg" />
+    <Content Include="Content\img\slides\slide_home_2.jpg" />
+    <Content Include="Content\img\slides\slide_home_3.jpg" />
+    <Content Include="Content\img\submit_restaurant_home.jpg" />
+    <Content Include="Content\img\submit_rider_home.jpg" />
+    <Content Include="Content\img\svg_icons\food_icon_1.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_10.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_11.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_12.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_13.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_14.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_15.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_16.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_17.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_18.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_19.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_2.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_20.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_21.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_22.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_23.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_24.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_25.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_26.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_27.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_28.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_29.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_3.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_30.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_31.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_32.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_33.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_34.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_35.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_36.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_37.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_38.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_39.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_4.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_40.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_41.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_42.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_43.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_44.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_45.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_46.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_47.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_48.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_5.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_6.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_7.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_8.svg" />
+    <Content Include="Content\img\svg_icons\food_icon_9.svg" />
+    <Content Include="Content\img\thumb_detail_1.jpg" />
+    <Content Include="Content\img\thumb_detail_2.jpg" />
+    <Content Include="Content\img\thumb_detail_3.jpg" />
+    <Content Include="Content\img\thumb_detail_4.jpg" />
+    <Content Include="Content\img\thumb_detail_5.jpg" />
+    <Content Include="Content\img\thumb_detail_6.jpg" />
+    <Content Include="Content\img\thumb_map_single_restaurant.jpg" />
+    <Content Include="Content\img\twitter_icon.svg" />
+    <Content Include="Content\img\video_fix.png" />
+    <Content Include="Content\img\wave_gray.svg" />
+    <Content Include="Content\img\wave_white.svg" />
+    <Content Include="Content\img\youtube_icon.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\EBurgerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EBurgerModel.Context.cs</LastGenOutput>
+      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\EBurgerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+      <LastGenOutput>EBurgerModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\AdminDashboard\js\admin-charts-all.js" />
+    <Content Include="Scripts\AdminDashboard\js\admin-charts.js" />
+    <Content Include="Scripts\AdminDashboard\js\admin-datatables.js" />
+    <Content Include="Scripts\AdminDashboard\js\admin.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-bs4.css" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-bs4.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-bs4.min.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-lite.css" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-lite.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote.css" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote.min.js" />
+    <Content Include="Scripts\AdminDashboard\js\editor\templates.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\EBurgerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EBurgerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EBurgerModel.edmx.diagram">
+      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\css\icon_fonts\font\ElegantIcons.eot" />
+    <Content Include="Content\css\icon_fonts\font\ElegantIcons.ttf" />
+    <Content Include="Content\css\icon_fonts\font\ElegantIcons.woff" />
+    <Content Include="Content\css\icon_fonts\font\food.eot" />
+    <Content Include="Content\css\icon_fonts\font\food.ttf" />
+    <Content Include="Content\css\icon_fonts\font\food.woff" />
+    <Content Include="Content\css\icon_fonts\font\Glyphter.eot" />
+    <Content Include="Content\css\icon_fonts\font\Glyphter.ttf" />
+    <Content Include="Content\css\icon_fonts\font\Glyphter.woff" />
+    <Content Include="Scripts\AdminDashboard\js\editor\font\summernote.eot" />
+    <Content Include="Scripts\AdminDashboard\js\editor\font\summernote.ttf" />
+    <Content Include="Scripts\AdminDashboard\js\editor\font\summernote.woff" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-bs4.js.map" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote-lite.js.map" />
+    <Content Include="Scripts\AdminDashboard\js\editor\summernote.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -147,6 +516,71 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\common_func.js" />
+    <Content Include="Scripts\js\common_scripts.js" />
+    <Content Include="Scripts\js\common_scripts.min.js" />
+    <Content Include="Scripts\js\isotope.min.js" />
+    <Content Include="Scripts\js\jarallax-video.min.js" />
+    <Content Include="Scripts\js\jarallax.min.js" />
+    <Content Include="Scripts\js\jquery.cookiebar.js" />
+    <Content Include="Scripts\js\jquery.nice-select.js" />
+    <Content Include="Scripts\js\jquery.nice-select.min.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet.min.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_func.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_half_screen_func.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_markercluster.min.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_markers.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_no_mapbox_func.js" />
+    <Content Include="Scripts\js\leaflet_map\leaflet_no_mapbox_half_screen_func.js" />
+    <Content Include="Scripts\js\main_mapfull_scripts.js" />
+    <Content Include="Scripts\js\main_mapfull_scripts.min.js" />
+    <Content Include="Scripts\js\main_map_scripts.js" />
+    <Content Include="Scripts\js\mapmarker.jquery.js" />
+    <Content Include="Scripts\js\mapmarker_func.jquery.js" />
+    <Content Include="Scripts\js\modal_popup.js" />
+    <Content Include="Scripts\js\modernizr.js" />
+    <Content Include="Scripts\js\modernizr.min.js" />
+    <Content Include="Scripts\js\pw_strenght.js" />
+    <Content Include="Scripts\js\single_files\bootstrap.bundle.js" />
+    <Content Include="Scripts\js\single_files\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\js\single_files\hideShowPassword.js" />
+    <Content Include="Scripts\js\single_files\hideShowPassword.min.js" />
+    <Content Include="Scripts\js\single_files\infobox.js" />
+    <Content Include="Scripts\js\single_files\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\js\single_files\jquery-ui.custom.js" />
+    <Content Include="Scripts\js\single_files\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\js\single_files\jquery-ui.js" />
+    <Content Include="Scripts\js\single_files\jquery.magnific-popup.js" />
+    <Content Include="Scripts\js\single_files\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\js\single_files\lazyload.js" />
+    <Content Include="Scripts\js\single_files\lazyload.min.js" />
+    <Content Include="Scripts\js\single_files\markerclusterer.js" />
+    <Content Include="Scripts\js\single_files\owl.carousel.js" />
+    <Content Include="Scripts\js\single_files\owl.carousel.min.js" />
+    <Content Include="Scripts\js\single_files\rangeslider.js" />
+    <Content Include="Scripts\js\single_files\rangeslider.min.js" />
+    <Content Include="Scripts\js\single_files\ResizeSensor.js" />
+    <Content Include="Scripts\js\single_files\ResizeSensor.min.js" />
+    <Content Include="Scripts\js\single_files\theia-sticky-sidebar.js" />
+    <Content Include="Scripts\js\single_files\theia-sticky-sidebar.min.js" />
+    <Content Include="Scripts\js\slider.js" />
+    <Content Include="Scripts\js\specific_detail.js" />
+    <Content Include="Scripts\js\specific_listing.js" />
+    <Content Include="Scripts\js\specific_review.js" />
+    <Content Include="Scripts\js\sticky-kit.js" />
+    <Content Include="Scripts\js\sticky-kit.min.js" />
+    <Content Include="Scripts\js\sticky_sidebar.js" />
+    <Content Include="Scripts\js\sticky_sidebar.min.js" />
+    <Content Include="Scripts\js\typed.js" />
+    <Content Include="Scripts\js\typed.min.js" />
+    <Content Include="Scripts\js\validate.js" />
+    <Content Include="Scripts\js\video_header.js" />
+    <Content Include="Scripts\js\video_header.min.js" />
+    <Content Include="Scripts\js\wizard\jquery-ui-1.8.22.min.js" />
+    <Content Include="Scripts\js\wizard\jquery.validate.js" />
+    <Content Include="Scripts\js\wizard\jquery.wizard.js" />
+    <Content Include="Scripts\js\wizard\wizard_func.js" />
+    <Content Include="Scripts\js\wizard\wizard_scripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -162,10 +596,32 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Dashboard\NewCategory.cshtml" />
+    <Content Include="Views\Dashboard\Categories.cshtml" />
+    <Content Include="Views\Dashboard\EditCategory.cshtml" />
+    <Content Include="Views\Dashboard\DeleteCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Content\AdminDashboard\css\" />
+    <Folder Include="Content\AdminDashboard\img\" />
+    <Folder Include="Content\AdminDashboard\vendor\bootstrap\css\" />
+    <Folder Include="Content\AdminDashboard\vendor\bootstrap\js\" />
+    <Folder Include="Content\AdminDashboard\vendor\chart.js\" />
+    <Folder Include="Content\AdminDashboard\vendor\datatables\" />
+    <Folder Include="Content\AdminDashboard\vendor\font-awesome\css\" />
+    <Folder Include="Content\AdminDashboard\vendor\font-awesome\fonts\" />
+    <Folder Include="Content\AdminDashboard\vendor\font-awesome\less\" />
+    <Folder Include="Content\AdminDashboard\vendor\font-awesome\scss\" />
+    <Folder Include="Content\AdminDashboard\vendor\jquery-easing\" />
+    <Folder Include="Content\AdminDashboard\vendor\jquery\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +635,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,208 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="~/Content/image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/Content/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="~/Content/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="~/Content/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="~/Content/img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- Bootstrap core CSS-->
+    @Styles.Render("~/Content/AdminDashboard/vendor/bootstrap/css/bootstrap.min.css")
+
+    <!-- Main styles -->
+    @Styles.Render("~/Content/AdminDashboard/css/admin.css")
+
+    <!-- Icon fonts-->
+    @Styles.Render("~/Content/AdminDashboard/vendor/font-awesome/css/font-awesome.min.css")
+
+    <!-- Plugin styles -->
+    @Styles.Render("~/Content/AdminDashboard/vendor/datatables/dataTables.bootstrap4.css")
+    @Styles.Render("~/Content/AdminDashboard/vendor/dropzone.css")
+
+    <!-- WYSIWYG Editor -->
+    @Styles.Render("~/Scripts/AdminDashboard/js/editor/summernote-bs4.css")
+
+    <!-- Your custom styles -->
+    @Styles.Render("~/Content/AdminDashboard/css/custom.css")
+</head>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
+        <a class="navbar-brand" href="/Dashboard"><img src="~/Content/AdminDashboard/img/logo.svg" alt="" width="167" height="36"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="/Dashboard">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCategory">
+                        <i class="fa fa-fw fa-filter"></i>
+                        <span class="nav-link-text">Categories</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseCategory">
+                        <li>
+                            <a href="/Dashboard/Categories">Category List</a>
+                        </li>
+                        <li>
+                            <a href="/Dashboard/NewCategory">Create New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMenuItems">
+                        <i class="fa fa-fw fa-clipboard"></i>
+                        <span class="nav-link-text">Menu Items</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMenuItems">
+                        <li>
+                            <a href="/Dashboard/Menus">Menu Items List</a>
+                        </li>
+                        <li>
+                            <a href="/Dashboard/NewMenu">Create Menu Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseOrders">
+                        <i class="fa fa-fw fa-shopping-basket"></i>
+                        <span class="nav-link-text">Orders</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseOrders">
+                        <li>
+                            <a href="/Dashboard/Orders">Current Orders List</a>
+                        </li>
+                        <li>
+                            <a href="/Dashboard/NewOrder">Orders List</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseUsers">
+                        <i class="fa fa-fw fa-users"></i>
+                        <span class="nav-link-text">Users</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseUsers">
+                        <li>
+                            <a href="/Dashboard/AdminUsers">Admin Users List</a>
+                        </li>
+                        <li>
+                            <a href="/Dashboard/NewAdminUser">Create Admin User</a>
+                        </li>
+                        <li>
+                            <a href="/Dashboard/Customers">Customer Users List</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReports">
+                        <i class="fa fa-fw fa-pie-chart"></i>
+                        <span class="nav-link-text">Reports</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseReports">
+                        <li>
+                            <a href="">Order Report</a>
+                        </li>
+                        <li>
+                            <a href="">Menu Report</a>
+                        </li>
+                        <li>
+                            <a href="">Customer Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">
+                    <a class="nav-link" href="/Dashboard/Profile">
+                        <i class="fa fa-fw fa-user"></i>
+                        <span class="nav-link-text">My Profile</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /Navigation-->
+
+    @RenderBody()
+
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © FOOYES 2021</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="#0">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    @Scripts.Render("~/Content/AdminDashboard/vendor/jquery/jquery.min.js")
+    @Scripts.Render("~/Content/AdminDashboard/vendor/bootstrap/js/bootstrap.bundle.min.js")
+
+
+    <!-- Core plugin JavaScript-->
+    @Scripts.Render("~/Content/AdminDashboard/vendor/jquery-easing/jquery.easing.min.js")
+
+
+    <!-- Page level plugin JavaScript-->
+    @Scripts.Render("~/Content/AdminDashboard/vendor/chart.js/Chart.js")
+    @Scripts.Render("~/Content/AdminDashboard/vendor/datatables/jquery.dataTables.js")
+    @Scripts.Render("~/Content/AdminDashboard/vendor/datatables/dataTables.bootstrap4.js")
+    @Scripts.Render("~/Content/AdminDashboard/vendor/jquery.magnific-popup.min.js")
+
+    <!-- Custom scripts for all pages-->
+    @Scripts.Render("~/Scripts/AdminDashboard/js/admin.js")
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

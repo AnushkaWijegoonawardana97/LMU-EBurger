@@ -1,0 +1,44 @@
+﻿@model LMU_EBurger.Models.Category
+
+@{
+    ViewBag.Title = "E-Burger - Admin Dashboard | Delete Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/Dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Categories</li>
+        </ol>
+
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-filter"></i> Delete Category
+            </div>
+            <div class="card-body text-center">
+                <h5 class="text-danger font-weight-bold mb-3">Are you sure you want to delete this?</h5>
+                <h3>@Html.DisplayFor(model => model.Name)</h3>
+                <p>@Html.DisplayFor(model => model.Description)</p>
+
+                @using (Html.BeginForm("DeleteCategory", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions">
+                        <input type="submit" value="Delete Category" class="btn_1 medium" />
+                    </div>
+                }
+            </div>
+            <div class="card-footer small text-muted">@Html.ActionLink("Back to List", "Index")</div>
+        </div>
+        <!-- /tables-->
+    </div>
+    <!-- /.container-fluid-->
+</div>
+
