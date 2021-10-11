@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="~/Content/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/Contentimg/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="~/Contentimg/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="~/Contentimg/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="~/Contentimg/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- GOOGLE WEB FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- BASE CSS -->
+    @Styles.Render("~/Content/css/bootstrap_customized.min.css")
+    @Styles.Render("~/Content/css/style.css")
+
+    <!-- SPECIFIC CSS -->
+    @Styles.Render("~/Content/css/order-sign_up.css")
+
+    <!-- YOUR CUSTOM CSS -->
+    @Styles.Render("~/Content/css/custom.css")
+</head>
+<body id="register_bg">
+    @RenderBody()
+
+
+    <!-- COMMON SCRIPTS -->
+    @Scripts.Render("~/Scripts/js/common_scripts.min.js")
+    @Scripts.Render("~/Scripts/js/common_func.js")
+    @Scripts.Render("~/Content/assets/validate.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

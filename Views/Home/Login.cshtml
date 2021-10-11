@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "E-Burger | Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div id="register">
+    <aside>
+        <figure>
+            <a href="index.html"><img src="~/Content/img/logo_sticky.svg" width="140" height="35" alt=""></a>
+        </figure>
+        <div class="mt-4"></div>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <input class="form-control" type="email" placeholder="Email">
+                <i class="icon_mail_alt"></i>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" id="password" placeholder="Password">
+                <i class="icon_lock_alt"></i>
+            </div>
+            <div class="clearfix add_bottom_15">
+                <div class="checkboxes float-left">
+                    <label class="container_check">
+                        Remember me
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="float-right"><a id="forgot" href="#0">Forgot Password?</a></div>
+            </div>
+
+            <input type="submit" value="Login Now!" class="btn_1 gradient full-width" />
+            <div class="text-center mt-2"><small>Don't have an acccount? <strong>@Html.ActionLink("Sign Up", "Registration", "Home")</strong></small></div>
+        }
+        <div class="copy">© 2021 E-Burger</div>
+    </aside>
+</div>
+<!-- /login -->
