@@ -605,6 +605,10 @@
     <Content Include="Views\Dashboard\Categories.cshtml" />
     <Content Include="Views\Dashboard\EditCategory.cshtml" />
     <Content Include="Views\Dashboard\DeleteCategory.cshtml" />
+    <Content Include="Views\Dashboard\NewMenu.cshtml" />
+    <Content Include="Views\Dashboard\Menus.cshtml" />
+    <Content Include="Views\Dashboard\DeleteMenu.cshtml" />
+    <Content Include="Views\Dashboard\EditMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

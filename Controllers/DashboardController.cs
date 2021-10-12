@@ -6,17 +6,24 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace LMU_EBurger.Controllers
 {
     public class DashboardController : Controller
     {
-        EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
         // GET: Dashboard
         public ActionResult Index()
         {
             return View();
         }
+
+        // EXPORTING THE ENTITY MODEL
+        EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
+
+        // ==================== Categories ====================
 
         // GET : Create Category View
         [HttpGet]
@@ -113,7 +120,7 @@ namespace LMU_EBurger.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                // TODO: Add update logic here`
                 using (DB)
                 {
                     Category category1 = DB.Categories.Where(Category => Category.CategoryID == id).FirstOrDefault();
@@ -125,6 +132,127 @@ namespace LMU_EBurger.Controllers
             catch
             {
                 return View("Categories");
+            }
+        }
+
+        // ==================== Menus ====================
+
+        // GET : Menu LIST
+        [HttpGet]
+        public ActionResult Menus()
+        {
+            return View(DB.Menus.ToList());
+        }
+
+        // GET : Create Menu View
+        [HttpGet]
+        public ActionResult NewMenu(Menu menu)
+        {
+            var categorylist = DB.Categories.ToList();
+            SelectList list = new SelectList(categorylist, "CategoryID", "Name");
+            ViewBag.categorylistname = list;
+
+            return View();
+        }
+
+
+        // POST : Save Menu Recordes To The Database Menus File
+        [HttpPost]
+        public ActionResult SaveMenu(Menu menu)
+        {
+            try
+            {
+                // STORING IMAGE IN TO THE LOCAL FORLDER & CREATING FILE PATH TO STORE IN THE DB
+                string fileName = Path.GetFileNameWithoutExtension(menu.ImageFile.FileName);
+                string extension = Path.GetExtension(menu.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                menu.Images = "/Assets/" + fileName;
+                fileName = Path.Combine(Server.MapPath("/Assets/"), fileName);
+                menu.ImageFile.SaveAs(fileName);
+
+                // SAVING DATA INTO THE Menu TABEL
+                DB.Menus.Add(menu);
+                DB.SaveChanges();
+
+                ModelState.Clear();
+
+                // REDIRECTING TO THE MENU LIST PAGE
+                return RedirectToAction("Menus");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Menus Tabel", "Create"));
+            }
+        }
+
+        // GET: Category/Edit/5
+        public ActionResult EditMenu(int id)
+        {
+            var categorylist = DB.Categories.ToList();
+            SelectList list = new SelectList(categorylist, "CategoryID", "Name");
+            ViewBag.categorylistname = list;
+
+            using (DB)
+            {
+                return View(DB.Menus.Where(Menu => Menu.MenuID == id).FirstOrDefault());
+            }
+        }
+
+        // POST: Category/Edit/5
+        [HttpPost]
+        public ActionResult EditMenu(int id, Menu menu)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                using (DB)
+                {
+                    // STORING IMAGE IN TO THE LOCAL FORLDER & CREATING FILE PATH TO STORE IN THE DB
+                    string fileName = Path.GetFileNameWithoutExtension(menu.ImageFile.FileName);
+                    string extension = Path.GetExtension(menu.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    menu.Images = "/Assets/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("/Assets/"), fileName);
+                    menu.ImageFile.SaveAs(fileName);
+
+                    DB.Entry(menu).State = EntityState.Modified;
+                    DB.SaveChanges();
+                }
+                return RedirectToAction("Menus");
+            }
+            catch
+            {
+                return View("EditMenu");
+            }
+        }
+
+        // GET: Menu/DeleteCategory/5
+        public ActionResult DeleteMenu(int id)
+        {
+            using (DB)
+            {
+                return View(DB.Menus.Where(Menu => Menu.MenuID == id).FirstOrDefault());
+            }
+        }
+
+        // POST: Menu/DeleteCategory/5
+        [HttpPost]
+        public ActionResult DeleteMenu(int id, Menu menu)
+        {
+            try
+            {
+                // TODO: Add update logic here`
+                using (DB)
+                {
+                    Menu menu1 = DB.Menus.Where(Menu => Menu.MenuID == id).FirstOrDefault();
+                    DB.Menus.Remove(menu1);
+                    DB.SaveChanges();
+                }
+                return RedirectToAction("Menus");
+            }
+            catch
+            {
+                return View("Menus");
             }
         }
     }

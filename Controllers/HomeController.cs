@@ -9,6 +9,9 @@ namespace LMU_EBurger.Controllers
 {
     public class HomeController : Controller
     {
+        EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
+
+
         public ActionResult Index()
         {
             return View();
@@ -16,15 +19,11 @@ namespace LMU_EBurger.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -47,9 +46,9 @@ namespace LMU_EBurger.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (EBurgerAppDBEntities db = new EBurgerAppDBEntities())
+                using (DB)
                 {
-                    var obj = db.Users.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    var obj = DB.Users.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
 
                     if (obj != null)
                     {
