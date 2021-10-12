@@ -11,7 +11,8 @@ namespace LMU_EBurger.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Menu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,9 +29,17 @@ namespace LMU_EBurger.Models
         public Nullable<bool> Availability { get; set; }
         public string PrepTime { get; set; }
         public int CategoryID { get; set; }
-    
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+    }
+
+    public enum AvailabilityOptions
+    {
+        Available,
+        UnAvailable
     }
 }

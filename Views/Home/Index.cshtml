@@ -1,31 +1,375 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "FooYes - Quality delivery or takeaway food";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<main>
+    <div class="hero_single version_1">
+        <div class="opacity-mask">
+            <div class="container">
+                <div class="row justify-content-lg-start justify-content-md-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <h1>Delivery or Takeaway</h1>
+                        <p>The best burger restaurants in the city</p>
+                        <form method="post" action="grid-listing-filterscol.html">
+                            <div class="row no-gutters custom-search-input">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <input class="form-control no_border_r" type="text" placeholder="What are you looking for...">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button class="btn_1 gradient" type="submit">Search</button>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="search_trends">
+                                <h5>Trending:</h5>
+                                <ul>
+                                    <li><a href="#0">Sushi</a></li>
+                                    <li><a href="#0">Burgher</a></li>
+                                    <li><a href="#0">Chinese</a></li>
+                                    <li><a href="#0">Pizza</a></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+        <div class="wave hero"></div>
+    </div>
+    <!-- /hero_single -->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="container margin_30_60">
+        <div class="main_title center">
+            <span><em></em></span>
+            <h2>Popular Categories</h2>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+        </div>
+        <!-- /main_title -->
+
+        <div class="owl-carousel owl-theme categories_carousel">
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>98</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_pizza.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Pizza</h3>
+                            <small>Avg price $40</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>87</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_sushi.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Japanese</h3>
+                            <small>Avg price $50</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>55</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_hamburgher.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Burghers</h3>
+                            <small>Avg price $55</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>55</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_vegetarian.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Vegetarian</h3>
+                            <small>Avg price $40</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>65</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_bakery.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Bakery</h3>
+                            <small>Avg price $60</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>25</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_chinesse.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Chinese</h3>
+                            <small>Avg price $40</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <div class="item_version_2">
+                <a href="grid-listing-filterscol.html">
+                    <figure>
+                        <span>35</span>
+                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_mexican.jpg" alt="" class="owl-lazy" width="350" height="450">
+                        <div class="info">
+                            <h3>Mexican</h3>
+                            <small>Avg price $35</small>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        <!-- /carousel -->
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <!-- /container -->
+
+    <div class="bg_gray">
+        <div class="container margin_60_40">
+            <div class="main_title">
+                <span><em></em></span>
+                <h2>Top Rated Burgers</h2>
+                <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+                <a href="#0">View All &rarr;</a>
+            </div>
+
+            <div class="row add_bottom_25">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                    <div class="strip">
+                        <figure>
+                            @*<span class="ribbon off">15% off</span>*@
+                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
+                            <a href="detail-restaurant.html" class="strip_info">
+                                <small>Pizza</small>
+                                <div class="item_title">
+                                    <h3>Da Alfredo</h3>
+                                    <small>27 Old Gloucester St</small>
+                                </div>
+                            </a>
+                        </figure>
+                        <ul>
+                            @*<li></li>*@
+                            <li>
+                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
+                                <div class="score"><strong>540.00 LKR</strong></div>
+                            </li>
+                            <li>
+                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /strip grid -->
+            </div>
+            <!-- /row -->
+
+            <div class="banner lazy" data-bg="url(/Content/img/banner_bg_desktop.jpg)">
+                <div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)">
+                    <div>
+                        <small>FooYes Delivery</small>
+                        <h3>We Deliver to your Office</h3>
+                        <p>Enjoy a tasty food in minutes!</p>
+                        <a href="grid-listing-filterscol.html" class="btn_1 gradient">Start Now!</a>
+                    </div>
+                </div>
+                <!-- /wrapper -->
+            </div>
+            <!-- /banner -->
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- /bg_gray -->
+
+    <div class="shape_element_2">
+        <div class="container margin_60_0">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="box_how">
+                                <figure><img src="~/Content/img/lazy-placeholder-100-100-white.png" data-src="/Content/img/how_1.svg" alt="" width="150" height="167" class="lazy"></figure>
+                                <h3>Easly Order</h3>
+                                <p>Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin.</p>
+                            </div>
+                            <div class="box_how">
+                                <figure><img src="~/Content/img/lazy-placeholder-100-100-white.png" data-src="/Content/img/how_2.svg" alt="" width="130" height="145" class="lazy"></figure>
+                                <h3>Quick Delivery</h3>
+                                <p>Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 align-self-center">
+                            <div class="box_how">
+                                <figure><img src="/Content/img/lazy-placeholder-100-100-white.png" data-src="/Content/img/how_3.svg" alt="" width="150" height="132" class="lazy"></figure>
+                                <h3>Enjoy Food</h3>
+                                <p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-3 d-block d-lg-none"><a href="#0" class="btn_1 medium gradient pulse_bt mt-2">Register Now!</a></p>
+                </div>
+                <div class="col-lg-5 offset-lg-1 align-self-center">
+                    <div class="intro_txt">
+                        <div class="main_title">
+                            <span><em></em></span>
+                            <h2>Start Ordering Now</h2>
+                        </div>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet libero id nisi euismod, sed porta est consectetur deserunt.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <p><a href="#0" class="btn_1 medium gradient pulse_bt mt-2">Register</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- /shape_element_2 -->
+
+</main>

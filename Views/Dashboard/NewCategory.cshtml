@@ -1,7 +1,7 @@
 ﻿@model LMU_EBurger.Models.Category
 
 @{
-    ViewBag.Title = "NewCategory";
+    ViewBag.Title = "E-Burger - Admin Dashboard | Creat Category";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -71,25 +71,3 @@
     <!-- /.container-fluid-->
 </div>
 
-<!-- Custom scripts for this page-->
-@section Scripts {
-    <!-- WYSIWYG Editor -->
-    @Scripts.Render("~/Content/AdminDashboard/vendor/dropzone.min.js");
-    @Scripts.Render("~/Scripts/AdminDashboard/js/editor/summernote-bs4.min.js");
-
-    <script type="text/javascript">
-        $('.editor').summernote({
-            fontSizes: ['10', '14'],
-            toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough']],
-                ['fontsize', ['fontsize']],
-                ['para', ['ul', 'ol', 'paragraph']]
-            ],
-            placeholder: 'Enter your category description here....',
-            tabsize: 2,
-            height: 200
-        });
-    </script>
-}

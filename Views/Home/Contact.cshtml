@@ -1,17 +1,81 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@Styles.Render("~/Content/css/contacts.css")
+<div class="hero_single version_1">
+    <div class="opacity-mask">
+        <div class="container">
+            <div class="row justify-content-lg-start justify-content-md-center">
+                <div class="col-xl-7 col-lg-8">
+                    <h1>Contact</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wave hero"></div>
+</div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<main>
+    <div class="bg_gray">
+        <div class="container margin_60_40">
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <div class="box_contacts">
+                        <i class="icon-food_icon_burgher"></i>
+                        <h2>Order Now</h2>
+                        <a href="#0">+94 77-116-1599</a> - <a href="#0">order@eburger.com</a><br />
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="box_contacts">
+                        <i class="icon_pin_alt"></i><br />
+                        <h2>Address</h2>
+                        <div>6th Forrest Ray, Colombo - 90000 LK</div>
+                        <small>MON to FRI 9am-9pm SAT 9am-6pm</small>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="box_contacts">
+                        <i class="icon-food_icon_delivery"></i>
+                        <h2>Work with us</h2>
+                        <a href="#0">+94 77-116-1599</a> - <a href="#0">contact@eburger.com</a><br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container margin_60_20">
+        <h5 class="mb_5">Drop Us a Line</h5>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 add_bottom_25">
+                <div id="message-contact"></div>
+                <form method="post" action="assets/contact.php" id="contactform" autocomplete="off">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Name" id="name_contact" name="name_contact">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" placeholder="Email" id="email_contact" name="email_contact">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" style="height: 150px;" placeholder="Message" id="message_contact" name="message_contact"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="verify_contact" name="verify_contact" placeholder="Are you human? 3 + 1 =">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn_1 gradient full-width" type="submit" value="Submit" id="submit-contact">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-8 col-md-6 add_bottom_25">
+                <iframe class="map_contact" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=colombo&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+</main>
+

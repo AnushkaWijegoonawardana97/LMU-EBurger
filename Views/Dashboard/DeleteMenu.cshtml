@@ -1,0 +1,60 @@
+﻿@model LMU_EBurger.Models.Menu
+
+@{
+    ViewBag.Title = "DeleteMenu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/Dashboard/Index">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Menus</li>
+        </ol>
+
+        <div class="box_general pb-3">
+            <div class="header_box">
+                <h2 class="d-inline-block">Delete Menu ID @Html.DisplayFor(model => model.MenuID)</h2>
+            </div>
+            <div class="list_general order">
+                <ul>
+                    <li>
+                        <figure><img src="~/Content/img/item_1.jpg" alt=""></figure>
+                        <h4>@Html.DisplayFor(model => model.Name)</h4>
+                        <ul class="booking_list">
+                            <li><strong>Description</strong> @Html.DisplayFor(model => model.Description)</li>
+                            <li><strong>Price</strong> @Html.DisplayFor(model => model.Price).00 LKR</li>
+                            <li><strong>Prep Time</strong> @Html.DisplayFor(model => model.PrepTime)</li>
+                            <li><strong>Category ID</strong> @Html.DisplayFor(model => model.CategoryID)</li>
+                            @if (Model.Availability == true)
+                            {
+                                <li><strong>Availability</strong> <i class="approved">Available</i></li>
+                            }
+                            else if (Model.Availability == false)
+                            {
+                                <li><strong>Availability</strong> <i class="cancel">Out of Service</i></li>
+                            }
+                            else
+                            {
+                                <li><strong>Availability</strong> <i class="pending">Not set</i></li>
+                            }
+                        </ul>
+
+                        @using (Html.BeginForm("DeleteMenu", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions">
+                                <input type="submit" value="Delete Category" class="btn_1 medium" />
+                            </div>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+</div>
