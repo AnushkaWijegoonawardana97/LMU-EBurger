@@ -30,7 +30,13 @@ namespace LMU_EBurger.Models
         public string City { get; set; }
         public string ZipCode { get; set; }
         public int UserId { get; set; }
-    
+
+        // Cutome attributes
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string AccessLevel { get; set; }
+        public string ProfileImage { get; set; }
+
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

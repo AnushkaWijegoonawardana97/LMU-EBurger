@@ -1,0 +1,96 @@
+﻿@model LMU_EBurger.Models.AdminUser
+
+@{
+    ViewBag.Title = "NewAdminAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/Dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">New Admin Account</li>
+        </ol>
+
+        <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+                <h2><i class="fa fa-filter"></i>Admin Account</h2>
+            </div>
+
+            @using (Html.BeginForm("SaveAdminAccount", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, "First Name")
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name..." } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, "Last Name")
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name..." } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, "Email")
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email..." } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phone, "Phone Number")
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone Number..." } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Username, "Username")
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username..." } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, "Password")
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password..." } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" value="Save Admin Account" class="btn_1 medium" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+</div>
+

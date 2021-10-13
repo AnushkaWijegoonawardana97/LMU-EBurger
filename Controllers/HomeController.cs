@@ -34,6 +34,49 @@ namespace LMU_EBurger.Controllers
             return View();
         }
 
+        // POST : Save Category Recordes To The Database Categories File
+        [HttpPost]
+        public ActionResult NewRegistration(Customer customer)
+        {
+            try
+            {
+                User user = new User();
+                user.Username = customer.Username;
+                user.Password = customer.Password;
+                user.AccessLevel = "Customer";
+                user.ProfileImage = "/Content/img/avatar1.jpg";
+
+                // Save User Admin as a user in the user table
+                DB.Users.Add(user);
+                DB.SaveChanges();
+
+                // Getting the user id of the newly created user
+                int latestUserId = user.UserID;
+
+                Customer customer1 = new Customer();
+                customer1.FirstName = customer.FirstName;
+                customer1.LastName = customer.LastName;
+                customer1.Email = customer.Email;
+                customer1.Phone = customer.Phone;
+                customer1.Phone = customer.FullAddress;
+                customer1.Phone = customer.District;
+                customer1.Phone = customer.City;
+                customer1.Phone = customer.ZipCode;
+                customer1.UserId = latestUserId;
+
+                // Save Admin User Into AdminUser Tabel
+                DB.Customers.Add(customer1);
+                DB.SaveChanges();
+
+                // REDIRECTING TO THE CATEGORY LIST PAGE
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Customer Tabel", "Create"));
+            }
+        }
+
         //Login Page View Controller Function
         public ActionResult Login()
         {
