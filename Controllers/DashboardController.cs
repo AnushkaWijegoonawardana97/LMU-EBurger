@@ -255,5 +255,60 @@ namespace LMU_EBurger.Controllers
                 return View("Menus");
             }
         }
+
+        // ==================== Admin Users ====================
+
+        // GET : Create Category View
+        [HttpGet]
+        public ActionResult NewAdminAccount(AdminUser adminUser)
+        {
+            return View();
+        }
+
+        // GET : CATEGORY LIST
+        [HttpGet]
+        public ActionResult AdminAccounts()
+        {
+            return View(DB.AdminUsers.ToList());
+        }
+
+        // POST : Save Category Recordes To The Database Categories File
+        [HttpPost]
+        public ActionResult SaveAdminAccount(AdminUser adminUser)
+        {
+            try
+            {
+                User user = new User();
+                user.Username = adminUser.Username;
+                user.Password = adminUser.Password;
+                user.AccessLevel = "Admin";
+                user.ProfileImage = "/Content/img/avatar1.jpg";
+
+                // Save User Admin as a user in the user table
+                DB.Users.Add(user);
+                DB.SaveChanges();
+
+                // Getting the user id of the newly created user
+                int latestUserId = user.UserID;
+
+                AdminUser adminUser1 = new AdminUser();
+                adminUser1.FirstName = adminUser.FirstName;
+                adminUser1.LastName = adminUser.LastName;
+                adminUser1.Email = adminUser.Email;
+                adminUser1.Phone = adminUser.Phone;
+                adminUser1.UserId = latestUserId;
+
+                // Save Admin User Into AdminUser Tabel
+                DB.AdminUsers.Add(adminUser1);
+                DB.SaveChanges();
+
+                // REDIRECTING TO THE CATEGORY LIST PAGE
+                return RedirectToAction("AdminAccounts");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "AdminAccounts Tabel", "Create"));
+            }
+        }
     }
 }

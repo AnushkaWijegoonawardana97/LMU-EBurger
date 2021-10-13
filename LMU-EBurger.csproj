@@ -600,7 +600,6 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Dashboard\NewCategory.cshtml" />
     <Content Include="Views\Dashboard\Categories.cshtml" />
     <Content Include="Views\Dashboard\EditCategory.cshtml" />
@@ -609,6 +608,9 @@
     <Content Include="Views\Dashboard\Menus.cshtml" />
     <Content Include="Views\Dashboard\DeleteMenu.cshtml" />
     <Content Include="Views\Dashboard\EditMenu.cshtml" />
+    <Content Include="Views\Dashboard\NewAdminAccount.cshtml" />
+    <Content Include="Views\Dashboard\AdminAccounts.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
