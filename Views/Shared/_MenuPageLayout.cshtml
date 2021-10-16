@@ -8,7 +8,7 @@
     <title>@ViewBag.Title</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="~/Content/image/x-icon">
+    <link rel="shortcut icon" href="~/Content/img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="~/Content/img/apple-touch-icon-57x57-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="~/Content/img/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="~/Content/img/apple-touch-icon-114x114-precomposed.png">
@@ -23,18 +23,18 @@
     @Styles.Render("~/Content/css/style.css")
 
     <!-- SPECIFIC CSS -->
-    @Styles.Render("~/Content/css/home.css")
+    @Styles.Render("~/Content/css/detail-page.css")
 
     <!-- YOUR CUSTOM CSS -->
     @Styles.Render("~/Content/css/custom.css")
 
 </head>
-<body>
-    <header class="header black_nav clearfix element_to_stick">
+<body data-spy="scroll" data-target="#secondary_nav" data-offset="75">
+    <header class="header_in clearfix">
         <div class="container">
             <div id="logo">
-                <a href="/">
-                    <img src="~/Content/img/logo_sticky.svg" width="162" height="35" alt="">
+                <a href="index.html">
+                    <img src="~/Content/img/logo_sticky.svg" width="140" height="35" alt="">
                 </a>
             </div>
             <div class="layer"></div><!-- Opacity Mask Menu Mobile -->
@@ -69,27 +69,24 @@
                     </div>
                     <!-- /dropdown-cart-->
                 </li>
-                @if (Session["UserId"] != null)
-                {
-                    <li>
-                        <div class="dropdown user clearfix">
-                            <a href="#" data-toggle="dropdown">
-                                <figure><img src="~/Content/img/avatar1.jpg" alt=""></figure><span>@Session["Username"]</span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-menu-content">
-                                    <ul>
-                                        <li><a href="#0"><i class="icon_cog"></i>Dashboard</a></li>
-                                        <li><a href="#0"><i class="icon_document"></i>Order History</a></li>
-                                        <li><a href="#0"><i class="icon_key"></i>Log out</a></li>
-                                    </ul>   
-                                </div>
+                <li>
+                    <div class="dropdown user clearfix">
+                        <a href="#" data-toggle="dropdown">
+                            <figure><img src="~/Content/img/avatar1.jpg" alt=""></figure><span>Jhon Doe</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-content">
+                                <ul>
+                                    <li><a href="#0"><i class="icon_cog"></i>Dashboard</a></li>
+                                    <li><a href="#0"><i class="icon_document"></i>Order History</a></li>
+                                    <li><a href="#0"><i class="icon_key"></i>Log out</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <!-- /dropdown -->
-                    </li>
-                }
-                </ul>
+                    </div>
+                    <!-- /dropdown -->
+                </li>
+            </ul>
             <!-- /top_menu -->
             <a href="#0" class="open_close">
                 <i class="icon_menu"></i><span>Menu</span>
@@ -122,6 +119,7 @@
             </nav>
         </div>
     </header>
+    <!-- /header -->
 
     @RenderBody()
 
@@ -195,5 +193,10 @@
     @Scripts.Render("~/Scripts/js/common_func.js")
     @Scripts.Render("~/Scripts/js/validate.js")
     @RenderSection("scripts", required: false)
+
+    <!-- SPECIFIC SCRIPTS -->
+    @Scripts.Render("~/Scripts/js/sticky_sidebar.min.js")
+    @Scripts.Render("~/Scripts/js/sticky-kit.min.js")
+    @Scripts.Render("~/Scripts/js/specific_detail.js")
 </body>
 </html>

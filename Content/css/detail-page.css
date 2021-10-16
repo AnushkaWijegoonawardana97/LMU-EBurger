@@ -390,7 +390,7 @@
   display: inline-block;
   margin-right: 15px;
 }
-.secondary_nav ul li:last-child {
+/*.secondary_nav ul li:last-child {
   margin-right: 0;
   border-left: 1px solid #ededed;
   padding-left: 18px;
@@ -400,7 +400,7 @@
   background-color: transparent;
   padding: 3px 12px;
   border: 1px solid #d2d8dd;
-}
+}*/
 .secondary_nav ul li a {
   color: #444;
   -webkit-border-radius: 20px;

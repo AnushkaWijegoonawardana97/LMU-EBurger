@@ -1,14 +1,10 @@
 ﻿using LMU_EBurger.Models;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace LMU_EBurger.Controllers
 {
@@ -17,11 +13,18 @@ namespace LMU_EBurger.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserId"] != null && Session["AccessLevel"].Equals("Admin"))
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // EXPORTING THE ENTITY MODEL
-        EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
+        private readonly EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
 
         // ==================== Categories ====================
 
@@ -71,7 +74,7 @@ namespace LMU_EBurger.Controllers
         // GET: Category/Edit/5
         public ActionResult EditCategory(int id)
         {
-            using(DB)
+            using (DB)
             {
                 return View(DB.Categories.Where(Category => Category.CategoryID == id).FirstOrDefault());
             }
@@ -84,7 +87,7 @@ namespace LMU_EBurger.Controllers
             try
             {
                 // TODO: Add update logic here
-                using(DB)
+                using (DB)
                 {
                     // STORING IMAGE IN TO THE LOCAL FORLDER & CREATING FILE PATH TO STORE IN THE DB
                     string fileName = Path.GetFileNameWithoutExtension(category.ImageFile.FileName);
@@ -98,7 +101,7 @@ namespace LMU_EBurger.Controllers
                     DB.SaveChanges();
                 }
                 return RedirectToAction("Categories");
-            }   
+            }
             catch
             {
                 return View("EditCategory");
@@ -148,7 +151,7 @@ namespace LMU_EBurger.Controllers
         [HttpGet]
         public ActionResult NewMenu(Menu menu)
         {
-            var categorylist = DB.Categories.ToList();
+            System.Collections.Generic.List<Category> categorylist = DB.Categories.ToList();
             SelectList list = new SelectList(categorylist, "CategoryID", "Name");
             ViewBag.categorylistname = list;
 
@@ -188,7 +191,7 @@ namespace LMU_EBurger.Controllers
         // GET: Category/Edit/5
         public ActionResult EditMenu(int id)
         {
-            var categorylist = DB.Categories.ToList();
+            System.Collections.Generic.List<Category> categorylist = DB.Categories.ToList();
             SelectList list = new SelectList(categorylist, "CategoryID", "Name");
             ViewBag.categorylistname = list;
 
@@ -278,11 +281,13 @@ namespace LMU_EBurger.Controllers
         {
             try
             {
-                User user = new User();
-                user.Username = adminUser.Username;
-                user.Password = adminUser.Password;
-                user.AccessLevel = "Admin";
-                user.ProfileImage = "/Content/img/avatar1.jpg";
+                User user = new User
+                {
+                    Username = adminUser.Username,
+                    Password = adminUser.Password,
+                    AccessLevel = "Admin",
+                    ProfileImage = "/Content/img/avatar1.jpg"
+                };
 
                 // Save User Admin as a user in the user table
                 DB.Users.Add(user);
@@ -291,12 +296,14 @@ namespace LMU_EBurger.Controllers
                 // Getting the user id of the newly created user
                 int latestUserId = user.UserID;
 
-                AdminUser adminUser1 = new AdminUser();
-                adminUser1.FirstName = adminUser.FirstName;
-                adminUser1.LastName = adminUser.LastName;
-                adminUser1.Email = adminUser.Email;
-                adminUser1.Phone = adminUser.Phone;
-                adminUser1.UserId = latestUserId;
+                AdminUser adminUser1 = new AdminUser
+                {
+                    FirstName = adminUser.FirstName,
+                    LastName = adminUser.LastName,
+                    Email = adminUser.Email,
+                    Phone = adminUser.Phone,
+                    UserId = latestUserId
+                };
 
                 // Save Admin User Into AdminUser Tabel
                 DB.AdminUsers.Add(adminUser1);
