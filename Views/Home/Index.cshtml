@@ -25,10 +25,10 @@
                             <div class="search_trends">
                                 <h5>Trending:</h5>
                                 <ul>
-                                    <li><a href="#0">Sushi</a></li>
-                                    <li><a href="#0">Burgher</a></li>
-                                    <li><a href="#0">Chinese</a></li>
-                                    <li><a href="#0">Pizza</a></li>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <li><a href="#0">@(item.Name)</a></li>
+                                    }
                                 </ul>
                             </div>
                         </form>
@@ -50,90 +50,21 @@
         <!-- /main_title -->
 
         <div class="owl-carousel owl-theme categories_carousel">
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>98</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_pizza.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Pizza</h3>
-                            <small>Avg price $40</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>87</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_sushi.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Japanese</h3>
-                            <small>Avg price $50</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>55</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_hamburgher.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Burghers</h3>
-                            <small>Avg price $55</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>55</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_vegetarian.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Vegetarian</h3>
-                            <small>Avg price $40</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>65</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_bakery.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Bakery</h3>
-                            <small>Avg price $60</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>25</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_chinesse.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Chinese</h3>
-                            <small>Avg price $40</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
-            <div class="item_version_2">
-                <a href="grid-listing-filterscol.html">
-                    <figure>
-                        <span>35</span>
-                        <img src="~/Content/img/home_cat_placeholder.jpg" data-src="/Content/img/home_cat_mexican.jpg" alt="" class="owl-lazy" width="350" height="450">
-                        <div class="info">
-                            <h3>Mexican</h3>
-                            <small>Avg price $35</small>
-                        </div>
-                    </figure>
-                </a>
-            </div>
+            @foreach (var item in Model.Categories)
+            {
+                <div class="item_version_2">
+                    <a href="grid-listing-filterscol.html">
+                        <figure>
+                            @*<span>98</span>*@
+                            <img src="@(item.Images)" data-src="@(item.Images)" alt="" class="owl-lazy" width="350" height="450">
+                            <div class="info">
+                                <h3>@(item.Name)</h3>
+                                <small>@(item.Description)</small>
+                            </div>
+                        </figure>
+                    </a>
+                </div>
+            }
         </div>
         <!-- /carousel -->
     </div>
@@ -149,167 +80,52 @@
             </div>
 
             <div class="row add_bottom_25">
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
+                @foreach (var item in Model.Menus)
+                {
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                        <div class="strip">
+                            <figure>
+                                @*<span class="ribbon off">15% off</span>*@
+                                <img src="~/Content/img/lazy-placeholder.png" data-src="@(item.Images)" class="img-fluid lazy" alt="">
+                                <a href="/Home/MenuDetails/@(item.MenuID)" class="strip_info">
+                                        @foreach (var catitem in Model.Categories)
+                                        {
+                                            if(catitem.CategoryID == item.CategoryID)
+                                                {
+                                                    <small>@(catitem.Name)</small>
+                                                }
+                                        }
+                                    <div class="item_title">
+                                        <h3>@(item.Name)</h3>
+                                        @*<small>27 Old Gloucester St</small>*@
+                                    </div>
+                                </a>
+                            </figure>
+                            <ul>
+                                @*<li></li>*@
+                                <li>
+                                    @if (item.Availability == true)
+                                    {
+                                        <span class="take yes">Available</span>
+                                    }
+                                    else if (item.Availability == false)
+                                    {
+                                        <span class="take no">Out of Service</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="take no"></span>
+                                    }
+                                    <div class="score"><strong>@(item.Price).00 LKR</strong></div>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <!-- /strip grid -->
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /strip grid -->
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /strip grid -->
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /strip grid -->
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /strip grid -->
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <div class="strip">
-                        <figure>
-                            @*<span class="ribbon off">15% off</span>*@
-                            <img src="~/Content/img/lazy-placeholder.png" data-src="/Content/img/location_1.jpg" class="img-fluid lazy" alt="">
-                            <a href="detail-restaurant.html" class="strip_info">
-                                <small>Pizza</small>
-                                <div class="item_title">
-                                    <h3>Da Alfredo</h3>
-                                    <small>27 Old Gloucester St</small>
-                                </div>
-                            </a>
-                        </figure>
-                        <ul>
-                            @*<li></li>*@
-                            <li>
-                                <span class="take yes">Takeaway</span> <span class="deliv yes">Delivery</span>
-                                <div class="score"><strong>540.00 LKR</strong></div>
-                            </li>
-                            <li>
-                                <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /strip grid -->
+                    <!-- /strip grid -->
+                }
             </div>
             <!-- /row -->
 

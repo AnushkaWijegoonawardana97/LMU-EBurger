@@ -16,83 +16,76 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
-
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name..." } })
-                <i class="icon_mail_alt"></i>
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                <i class="icon_pencil-edit"></i>
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
-
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name..." } })
-                <i class="icon_lock_alt"></i>
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                <i class="icon_pencil-edit"></i>
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                <i class="icon_pencil-edit"></i>
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password..." } })
+            <div class="form-group">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
                 <i class="icon_lock_alt"></i>
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email..." } })
+            <div class="form-group">
+                @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm Password" } })
                 <i class="icon_lock_alt"></i>
+                @Html.ValidationMessageFor(model => model.confirmPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.FullAddress, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.FullAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.FullAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Full Address" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.FullAddress, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.District, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "District..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "District" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2 d-none" })
 
-                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code..." } })
-                <i class="icon_lock_alt"></i>
+            <div class="form-group">
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
+                <i class="icon_mail_alt"></i>
                 @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
             </div>
 
-            @*<input type="submit" value="Registrer Now!" class="btn_1 gradient full-width" />*@
-            <input type="submit" value="Save Admin Account" class="btn_1 medium" />
+            <div id="pass-info" class="clearfix"></div>
+            <input type="submit" value="Register Now!" class="btn_1 gradient full-width" />
+            <div class="text-center mt-2"><small>Already have an acccount? <strong><a href="#0">Sign In</a></strong></small></div>
         }
-        <div class="text-center mt-2"><small>Already have an acccount? <strong>@Html.ActionLink("Login", "Login", "Home")</strong></small></div>
         <div class="copy">© 2021 E-Burger</div>
     </aside>
 </div>
 <!-- /login -->
-

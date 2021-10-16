@@ -1,6 +1,7 @@
-﻿
+﻿@model LMU_EBurger.Models.User
+
 @{
-    ViewBag.Title = "E-Burger | Login";
+    ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 
@@ -15,14 +16,16 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             <div class="form-group">
-                <input class="form-control" type="email" placeholder="Email">
-                <i class="icon_mail_alt"></i>
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                <i class="icon_pencil-edit"></i>
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" id="password" placeholder="Password">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 <i class="icon_lock_alt"></i>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
-            <div class="clearfix add_bottom_15">
+            @*<div class="clearfix add_bottom_15">
                 <div class="checkboxes float-left">
                     <label class="container_check">
                         Remember me
@@ -31,9 +34,10 @@
                     </label>
                 </div>
                 <div class="float-right"><a id="forgot" href="#0">Forgot Password?</a></div>
-            </div>
+            </div>*@
 
             <input type="submit" value="Login Now!" class="btn_1 gradient full-width" />
+
             <div class="text-center mt-2"><small>Don't have an acccount? <strong>@Html.ActionLink("Sign Up", "Registration", "Home")</strong></small></div>
         }
         <div class="copy">© 2021 E-Burger</div>

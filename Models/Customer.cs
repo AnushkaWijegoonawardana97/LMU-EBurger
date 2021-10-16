@@ -34,8 +34,12 @@ namespace LMU_EBurger.Models
         // Cutome attributes
         public string Username { get; set; }
         public string Password { get; set; }
+
+        public string confirmPassword { get; set; }
+
         public string AccessLevel { get; set; }
         public string ProfileImage { get; set; }
+
 
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
