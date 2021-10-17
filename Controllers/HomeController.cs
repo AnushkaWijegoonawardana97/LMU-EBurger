@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace LMU_EBurger.Controllers
 {
@@ -42,6 +43,18 @@ namespace LMU_EBurger.Controllers
             return View();
         }
 
+        public ActionResult Order()
+        {
+            if (Session["UserId"] != null && Session["AccessLevel"].Equals("Customer"))
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
 
         public ActionResult Menu()
         {
@@ -57,6 +70,49 @@ namespace LMU_EBurger.Controllers
             {
                 return View(DB.Menus.Where(Menu => Menu.MenuID == id).FirstOrDefault());
             }
+        }
+
+        // Add Menu Items To Cart
+        public ActionResult AddToCart(int MenuID)
+        {
+            if(Session["Cart"] == null)
+            {
+                List<CartItem> cartItems = new List<CartItem>();
+                cartItems.Add(new CartItem { Menu = DB.Menus.Where(Menu => Menu.MenuID == MenuID).FirstOrDefault(), Quantity = 1 });
+                Session["Cart"] = cartItems;
+            }
+            else
+            {
+                List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                int index = isExist(MenuID);
+                if(index != -1)
+                {
+                    cartItems[index].Quantity++;
+                } else
+                {
+                    cartItems.Add(new CartItem { Menu = DB.Menus.Where(Menu => Menu.MenuID == MenuID).FirstOrDefault(), Quantity = 1 });
+                }
+                Session["Cart"] = cartItems;
+            }
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult RemoveFromCart(int MenuID)
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+            int index = isExist(MenuID);
+            cartItems.RemoveAt(index);
+            Session["Cart"] = cartItems;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        private int isExist(int MenuID)
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+            for (int i = 0; i < cartItems.Count; i++)
+                if (cartItems[i].Menu.MenuID.Equals(MenuID))
+                    return i;
+            return -1;
         }
 
         // Customer Registration Page View Controller Function
@@ -181,6 +237,13 @@ namespace LMU_EBurger.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
         }
     }
 }

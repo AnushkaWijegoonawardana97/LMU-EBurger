@@ -51,41 +51,18 @@
                 <div class="box_order mobile_fixed">
                     <!-- /head -->
                     <div class="main">
-                        <div class="content">
-                            <h6>Quantity</h6>
-                            <div class="numbers-row">
-                                <input type="text" value="1" id="qty_1" class="qty2 form-control" name="quantity">
-                                <div class="inc button_inc">+</div><div class="dec button_inc">-</div>
-                            </div>
-                        </div>
-                        <div class="row opt_order">
-                            <div class="col-6">
-                                <label class="container_radio">
-                                    Delivery
-                                    <input type="radio" value="option1" name="opt_order" checked>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-6">
-                                <label class="container_radio">
-                                    Take away
-                                    <input type="radio" value="option1" name="opt_order">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
                         <ul class="clearfix">
                             <li class="total">Price<span>@Html.DisplayFor(model => model.Price).00 LKR</span></li>
                         </ul>
                         <div class="btn_1_mobile">
-                            <a href="booking.html" class="btn_1 gradient full-width mb_5">Order Now</a>
+                            <a href="@Url.Action("AddToCart", "Home", new { MenuID = Model.MenuID })" class="btn_1 gradient full-width mb_5">Order Now</a>
                             <div class="text-center"><small>No money charged on this steps</small></div>
                         </div>
                     </div>
                 </div>
                 <!-- /box_order -->
 
-                <div class="btn_reserve_fixed"><a href="#0" class="btn_1 gradient full-width">View Basket</a></div>
+                <div class="btn_reserve_fixed"><a href="@Url.Action("AddToCart", "Home", new { MenuID = Model.MenuID })" class="btn_1 gradient full-width">View Basket</a></div>
             </div>
 
             <div class="col-lg-12 mt-5">

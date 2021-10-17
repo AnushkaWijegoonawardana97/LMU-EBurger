@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "FooYes - Quality delivery or takeaway food";
+    ViewBag.Title = "E-Burger - Quality delivery or takeaway food";
 }
 
 <main>
@@ -41,6 +41,8 @@
     </div>
     <!-- /hero_single -->
 
+    
+
     <div class="container margin_30_60">
         <div class="main_title center">
             <span><em></em></span>
@@ -49,11 +51,12 @@
         </div>
         <!-- /main_title -->
 
+
         <div class="owl-carousel owl-theme categories_carousel">
             @foreach (var item in Model.Categories)
             {
                 <div class="item_version_2">
-                    <a href="grid-listing-filterscol.html">
+                    <a href="#">
                         <figure>
                             @*<span>98</span>*@
                             <img src="@(item.Images)" data-src="@(item.Images)" alt="" class="owl-lazy" width="350" height="450">
@@ -88,13 +91,13 @@
                                 @*<span class="ribbon off">15% off</span>*@
                                 <img src="~/Content/img/lazy-placeholder.png" data-src="@(item.Images)" class="img-fluid lazy" alt="">
                                 <a href="/Home/MenuDetails/@(item.MenuID)" class="strip_info">
-                                        @foreach (var catitem in Model.Categories)
+                                    @foreach (var catitem in Model.Categories)
+                                    {
+                                        if (catitem.CategoryID == item.CategoryID)
                                         {
-                                            if(catitem.CategoryID == item.CategoryID)
-                                                {
-                                                    <small>@(catitem.Name)</small>
-                                                }
+                                            <small>@(catitem.Name)</small>
                                         }
+                                    }
                                     <div class="item_title">
                                         <h3>@(item.Name)</h3>
                                         @*<small>27 Old Gloucester St</small>*@
@@ -119,7 +122,7 @@
                                     <div class="score"><strong>@(item.Price).00 LKR</strong></div>
                                 </li>
                                 <li>
-                                    <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                                    <a href="@Url.Action("AddToCart", "Home", new { MenuID = item.MenuID })" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
                                 </li>
                             </ul>
                         </div>
