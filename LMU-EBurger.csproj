@@ -136,6 +136,7 @@
     <Compile Include="Models\AdminUser.cs">
       <DependentUpon>EBurgerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>EBurgerModel.tt</DependentUpon>
     </Compile>
@@ -614,6 +615,8 @@
     <Content Include="Views\Shared\_MenuPageLayout.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\MenuDetails.cshtml" />
+    <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Home\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using LMU_EBurger.Models;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,6 +25,7 @@
     @Styles.Render("~/Content/css/style.css")
 
     <!-- SPECIFIC CSS -->
+    @Styles.Render("~/Content/css/order-sign_up.css")
     @Styles.Render("~/Content/css/detail-page.css")
 
     <!-- YOUR CUSTOM CSS -->
@@ -33,59 +36,96 @@
     <header class="header_in clearfix">
         <div class="container">
             <div id="logo">
-                <a href="index.html">
+                <a href="@Url.Action("Index", "Home")">
                     <img src="~/Content/img/logo_sticky.svg" width="140" height="35" alt="">
                 </a>
             </div>
             <div class="layer"></div><!-- Opacity Mask Menu Mobile -->
             <ul id="top_menu" class="drop_user">
-                <li><a href="#sign-in-dialog" id="sign-in" class="login">Sign In</a></li>
                 <li>
                     <div class="dropdown dropdown-cart">
-                        <a href="cart.html" class="cart_bt"><strong>2</strong></a>
+                        @if (Session["Cart"] != null)
+                        {
+                            List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                            var quantity = cartItems.Sum(item => item.Quantity);
+                            <a href="@Url.Action("Order", "Home")" class="cart_bt"><strong>@quantity</strong></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Order", "Home")" class="cart_bt"><strong>0</strong></a>
+                        }
+
                         <div class="dropdown-menu">
                             <ul>
-                                <li>
-                                    <figure><img src="~/Content/img/menu-thumb-placeholder.jpg" data-src="/Content/img/menu-thumb-1.jpg" alt="" width="50" height="50" class="lazy"></figure>
-                                    <strong><span>1x Pizza Napoli</span>$12.00</strong>
-                                    <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
-                                </li>
-                                <li>
-                                    <figure><img src="~/Content/img/menu-thumb-placeholder.jpg" data-src="/Content/img/menu-thumb-2.jpg" alt="" width="50" height="50" class="lazy"></figure>
-                                    <strong><span>1x Hamburgher Maxi</span>$10.00</strong>
-                                    <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
-                                </li>
-                                <li>
-                                    <figure><img src="~/Content/img/menu-thumb-placeholder.jpg" data-src="/Content/img/menu-thumb-3.jpg" alt="" width="50" height="50" class="lazy"></figure>
-                                    <strong><span>1x Red Wine Bottle</span>$20.00</strong>
-                                    <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
-                                </li>
+                                @if (Session["Cart"] != null)
+                                {
+                                    foreach (CartItem item in (List<CartItem>)Session["Cart"])
+                                    {
+                                        <li>
+                                            <figure><img src="~/Content/img/menu-thumb-placeholder.jpg" data-src="@item.Menu.Images" alt="@item.Menu.Name" width="50" height="50" class="lazy"></figure>
+                                            <strong><span>@item.Quantity x @item.Menu.Name </span>@item.Menu.Price.00 LKR</strong>
+                                            <a href="@Url.Action("RemoveFromCart", "Home", new { MenuID = item.Menu.MenuID })" class="action"><i class="icon_trash_alt"></i></a>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        Your Cart is Empty
+                                    </li>
+                                }
                             </ul>
                             <div class="total_drop">
-                                <div class="clearfix add_bottom_15"><strong>Total</strong><span>$32.00</span></div>
-                                <a href="order.html" class="btn_1">View Cart</a>
+                                @if (Session["Cart"] != null)
+                                {
+                                    List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                                    var total = cartItems.Sum(item => Int64.Parse(item.Menu.Price) * item.Quantity);
+                                    <div class="clearfix add_bottom_15"><strong>Total</strong><span>@total.00 LKR</span></div>
+                                }
+                                else
+                                {
+                                    <div class="clearfix add_bottom_15"><strong>Total</strong><span>00.00 LKR</span></div>
+                                }
+                                <a href="@Url.Action("Order", "Home")" class="btn_1">View Cart</a>
                             </div>
                         </div>
                     </div>
                     <!-- /dropdown-cart-->
                 </li>
-                <li>
-                    <div class="dropdown user clearfix">
-                        <a href="#" data-toggle="dropdown">
-                            <figure><img src="~/Content/img/avatar1.jpg" alt=""></figure><span>Jhon Doe</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-menu-content">
-                                <ul>
-                                    <li><a href="#0"><i class="icon_cog"></i>Dashboard</a></li>
-                                    <li><a href="#0"><i class="icon_document"></i>Order History</a></li>
-                                    <li><a href="#0"><i class="icon_key"></i>Log out</a></li>
-                                </ul>
+                @if (Session["UserId"] == null)
+                {
+                    <li>
+                        @*<a href="#sign-in-dialog" id="sign-in" class="login">Sign In</a>*@
+                        @Html.ActionLink("Sign In", "Login", "Home", new { @class = "login" })
+                    </li>
+                }
+                @if (Session["UserId"] != null)
+                {
+                    <li>
+                        <div class="dropdown user clearfix">
+                            <a href="#" data-toggle="dropdown">
+                                <figure><img src="~/Content/img/avatar1.jpg" alt=""></figure><span>@Session["Username"]</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-menu-content">
+                                    <ul>
+                                        @if (Session["AccessLevel"].ToString() == "Admin")
+                                        {
+                                            <li><a href="@Url.Action("Index", "Dashboard")"><i class="icon_cog"></i>Dashboard</a></li>
+                                        }
+                                        @if (Session["AccessLevel"].ToString() == "Customer")
+                                        {
+                                            <li><a href="@Url.Action("Profile", "Home")"><i class="icon_cog"></i>Profile</a></li>
+                                            <li><a href="@Url.Action("OrderHistory", "Home")"><i class="icon_document"></i>Order History</a></li>
+                                        }
+                                        <li><a href="@Url.Action("Logout", "Home")"><i class="icon_key"></i>Log out</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /dropdown -->
-                </li>
+                        <!-- /dropdown -->
+                    </li>
+                }
             </ul>
             <!-- /top_menu -->
             <a href="#0" class="open_close">

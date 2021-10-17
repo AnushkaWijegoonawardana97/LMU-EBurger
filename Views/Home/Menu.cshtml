@@ -5,7 +5,7 @@
 
 
 <main>
-    <div class="hero_in detail_page background-image" data-background="url(/Content/img/hero_general.jpg)">
+    <div class="hero_in detail_page background-image" data-background="url(/Content/img/menu-page-banner.png)">
         <div class="wrapper opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
 
             <div class="container d-flex align-items-center justify-content-center">
@@ -83,7 +83,7 @@
                                                     <div class="score"><strong>@(menuItem.Price).00 LKR</strong></div>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
+                                                    <a href="@Url.Action("AddToCart", "Home", new { MenuID = menuItem.MenuID })" class="add-cart yes"><i class="icon_plus_alt2"></i> Add To Cart</a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -19,7 +19,7 @@ namespace LMU_EBurger.Controllers
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
         }
 
@@ -166,7 +166,7 @@ namespace LMU_EBurger.Controllers
             try
             {
                 // STORING IMAGE IN TO THE LOCAL FORLDER & CREATING FILE PATH TO STORE IN THE DB
-                string fileName = Path.GetFileNameWithoutExtension(menu.ImageFile.FileName);
+                string fileName = Path.GetFileNameWithoutExtension(menu.ImageFile.FileName);    
                 string extension = Path.GetExtension(menu.ImageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 menu.Images = "/Assets/" + fileName;
