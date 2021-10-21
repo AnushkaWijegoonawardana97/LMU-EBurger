@@ -29,11 +29,15 @@ namespace LMU_EBurger.Models
         public string Total { get; set; }
         public string OrderStatus { get; set; }
         public int CustomerID { get; set; }
-    
+        public string MenuItems { get; set; }
+
+        public string FullAddress { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
+
         public virtual Customer Customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDelivery> OrderDeliveries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

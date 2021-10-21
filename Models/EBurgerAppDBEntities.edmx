@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EBurgerAppDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EBurgerAppDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminUsers">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -40,7 +40,7 @@
           <Property Name="ZipCode" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Menu">
+        <EntityType Name="Menus">
           <Key>
             <PropertyRef Name="MenuID" />
           </Key>
@@ -53,7 +53,7 @@
           <Property Name="PrepTime" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="OrderDelivery">
+        <EntityType Name="OrderDeliveries">
           <Key>
             <PropertyRef Name="DeliveryId" />
           </Key>
@@ -78,12 +78,13 @@
           </Key>
           <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderType" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="CreateAt" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreateAt" Type="nvarchar(max)" />
           <Property Name="SubTotal" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="DeliveryFee" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Total" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="OrderStatus" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="MenuItems" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -121,33 +122,33 @@
         </Association>
         <Association Name="FK__Menu__CategoryID__4222D4EF">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="CategoryID" />
             </Principal>
-            <Dependent Role="Menu">
+            <Dependent Role="Menus">
               <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderDeli__Order__4BAC3F29">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrderDelivery" Type="Self.OrderDelivery" Multiplicity="*" />
+          <End Role="OrderDeliveries" Type="Self.OrderDeliveries" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="OrderID" />
             </Principal>
-            <Dependent Role="OrderDelivery">
+            <Dependent Role="OrderDeliveries">
               <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderItem__MenuI__48CFD27E">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Menu">
+            <Principal Role="Menus">
               <PropertyRef Name="MenuID" />
             </Principal>
             <Dependent Role="OrderItems">
@@ -183,8 +184,8 @@
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderDelivery" EntityType="Self.OrderDelivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDeliveries" EntityType="Self.OrderDeliveries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -198,14 +199,14 @@
           </AssociationSet>
           <AssociationSet Name="FK__Menu__CategoryID__4222D4EF" Association="Self.FK__Menu__CategoryID__4222D4EF">
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menus" EntitySet="Menus" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeli__Order__4BAC3F29" Association="Self.FK__OrderDeli__Order__4BAC3F29">
             <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDelivery" EntitySet="OrderDelivery" />
+            <End Role="OrderDeliveries" EntitySet="OrderDeliveries" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderItem__MenuI__48CFD27E" Association="Self.FK__OrderItem__MenuI__48CFD27E">
-            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menus" EntitySet="Menus" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderItem__Order__47DBAE45" Association="Self.FK__OrderItem__Order__47DBAE45">
@@ -217,7 +218,8 @@
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EBurgerAppDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -241,7 +243,7 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Images" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Menus" Relationship="Self.FK__Menu__CategoryID__4222D4EF" FromRole="Categories" ToRole="Menu" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK__Menu__CategoryID__4222D4EF" FromRole="Categories" ToRole="Menus" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -272,8 +274,8 @@
           <Property Name="Availability" Type="Boolean" />
           <Property Name="PrepTime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Menu__CategoryID__4222D4EF" FromRole="Menu" ToRole="Categories" />
-          <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__MenuI__48CFD27E" FromRole="Menu" ToRole="OrderItems" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Menu__CategoryID__4222D4EF" FromRole="Menus" ToRole="Categories" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__MenuI__48CFD27E" FromRole="Menus" ToRole="OrderItems" />
         </EntityType>
         <EntityType Name="OrderDelivery">
           <Key>
@@ -285,7 +287,7 @@
           <Property Name="District" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ZIpCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeli__Order__4BAC3F29" FromRole="OrderDelivery" ToRole="Orders" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeli__Order__4BAC3F29" FromRole="OrderDeliveries" ToRole="Orders" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -294,7 +296,7 @@
           <Property Name="OrderItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="MenuID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Menu" Relationship="Self.FK__OrderItem__MenuI__48CFD27E" FromRole="OrderItems" ToRole="Menu" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__OrderItem__MenuI__48CFD27E" FromRole="OrderItems" ToRole="Menus" />
           <NavigationProperty Name="Order" Relationship="Self.FK__OrderItem__Order__47DBAE45" FromRole="OrderItems" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Order">
@@ -303,14 +305,15 @@
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreateAt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateAt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SubTotal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DeliveryFee" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Total" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OrderStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="MenuItems" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__44FF419A" FromRole="Orders" ToRole="Customers" />
-          <NavigationProperty Name="OrderDeliveries" Relationship="Self.FK__OrderDeli__Order__4BAC3F29" FromRole="Orders" ToRole="OrderDelivery" />
+          <NavigationProperty Name="OrderDeliveries" Relationship="Self.FK__OrderDeli__Order__4BAC3F29" FromRole="Orders" ToRole="OrderDeliveries" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Order__47DBAE45" FromRole="Orders" ToRole="OrderItems" />
         </EntityType>
         <EntityType Name="User">
@@ -339,12 +342,12 @@
         </Association>
         <Association Name="FK__Menu__CategoryID__4222D4EF">
           <End Role="Categories" Type="Self.Category" Multiplicity="1" />
-          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="CategoryID" />
             </Principal>
-            <Dependent Role="Menu">
+            <Dependent Role="Menus">
               <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -374,10 +377,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderItem__MenuI__48CFD27E">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Menu">
+            <Principal Role="Menus">
               <PropertyRef Name="MenuID" />
             </Principal>
             <Dependent Role="OrderItems">
@@ -387,12 +390,12 @@
         </Association>
         <Association Name="FK__OrderDeli__Order__4BAC3F29">
           <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDelivery" Type="Self.OrderDelivery" Multiplicity="*" />
+          <End Role="OrderDeliveries" Type="Self.OrderDelivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="OrderID" />
             </Principal>
-            <Dependent Role="OrderDelivery">
+            <Dependent Role="OrderDeliveries">
               <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
@@ -409,7 +412,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EBurgerAppDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EBurgerAppDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -424,7 +427,7 @@
           </AssociationSet>
           <AssociationSet Name="FK__Menu__CategoryID__4222D4EF" Association="Self.FK__Menu__CategoryID__4222D4EF">
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menus" EntitySet="Menus" />
           </AssociationSet>
           <AssociationSet Name="FK__Customers__UserI__3D5E1FD2" Association="Self.FK__Customers__UserI__3D5E1FD2">
             <End Role="Users" EntitySet="Users" />
@@ -435,12 +438,12 @@
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderItem__MenuI__48CFD27E" Association="Self.FK__OrderItem__MenuI__48CFD27E">
-            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menus" EntitySet="Menus" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeli__Order__4BAC3F29" Association="Self.FK__OrderDeli__Order__4BAC3F29">
             <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDelivery" EntitySet="OrderDeliveries" />
+            <End Role="OrderDeliveries" EntitySet="OrderDeliveries" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderItem__Order__47DBAE45" Association="Self.FK__OrderItem__Order__47DBAE45">
             <End Role="Orders" EntitySet="Orders" />
@@ -452,7 +455,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EBurgerAppDBModelStoreContainer" CdmEntityContainer="EBurgerAppDBEntities">
+        <EntityContainerMapping StorageEntityContainer="EBurgerAppDBModelStoreContainer" CdmEntityContainer="EBurgerAppDBEntities1">
           <EntitySetMapping Name="AdminUsers">
             <EntityTypeMapping TypeName="EBurgerAppDBModel.AdminUser">
               <MappingFragment StoreEntitySet="AdminUsers">
@@ -493,7 +496,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="EBurgerAppDBModel.Menu">
-              <MappingFragment StoreEntitySet="Menu">
+              <MappingFragment StoreEntitySet="Menus">
                 <ScalarProperty Name="MenuID" ColumnName="MenuID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -507,7 +510,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDeliveries">
             <EntityTypeMapping TypeName="EBurgerAppDBModel.OrderDelivery">
-              <MappingFragment StoreEntitySet="OrderDelivery">
+              <MappingFragment StoreEntitySet="OrderDeliveries">
                 <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="FullAddress" ColumnName="FullAddress" />
@@ -537,6 +540,7 @@
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="MenuItems" ColumnName="MenuItems" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

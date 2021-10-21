@@ -51,6 +51,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -128,50 +129,51 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerDetails.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminUser.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EBurgerModel.Context.cs">
+    <Compile Include="Models\EBurgerAppDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EBurgerModel.Context.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EBurgerModel.cs">
+    <Compile Include="Models\EBurgerAppDBEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EBurgerModel.Designer.cs">
+    <Compile Include="Models\EBurgerAppDBEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDelivery.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderItem.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>EBurgerModel.tt</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -460,15 +462,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EBurgerModel.Context.tt">
+    <Content Include="Models\EBurgerAppDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EBurgerModel.Context.cs</LastGenOutput>
-      <DependentUpon>EBurgerModel.edmx</DependentUpon>
+      <DependentUpon>EBurgerAppDBEntities.edmx</DependentUpon>
+      <LastGenOutput>EBurgerAppDBEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EBurgerModel.tt">
+    <Content Include="Models\EBurgerAppDBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EBurgerModel.edmx</DependentUpon>
-      <LastGenOutput>EBurgerModel.cs</LastGenOutput>
+      <DependentUpon>EBurgerAppDBEntities.edmx</DependentUpon>
+      <LastGenOutput>EBurgerAppDBEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\AdminDashboard\js\admin-charts-all.js" />
     <Content Include="Scripts\AdminDashboard\js\admin-charts.js" />
@@ -485,13 +487,6 @@
     <Content Include="Scripts\AdminDashboard\js\editor\templates.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EBurgerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EBurgerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EBurgerModel.edmx.diagram">
-      <DependentUpon>EBurgerModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\css\icon_fonts\font\ElegantIcons.eot" />
     <Content Include="Content\css\icon_fonts\font\ElegantIcons.ttf" />
     <Content Include="Content\css\icon_fonts\font\ElegantIcons.woff" />
@@ -507,6 +502,13 @@
     <Content Include="Scripts\AdminDashboard\js\editor\summernote-bs4.js.map" />
     <Content Include="Scripts\AdminDashboard\js\editor\summernote-lite.js.map" />
     <Content Include="Scripts\AdminDashboard\js\editor\summernote.js.map" />
+    <EntityDeploy Include="Models\EBurgerAppDBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EBurgerAppDBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EBurgerAppDBEntities.edmx.diagram">
+      <DependentUpon>EBurgerAppDBEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -617,6 +619,10 @@
     <Content Include="Views\Home\MenuDetails.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\OrderHistroy.cshtml" />
+    <Content Include="Views\Home\OrderConfirmed.cshtml" />
+    <Content Include="Views\Dashboard\CustomerAccounts.cshtml" />
+    <Content Include="Views\Dashboard\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

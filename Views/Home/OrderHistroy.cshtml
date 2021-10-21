@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LMU_EBurger.Models.Order>
+
+@{
+    ViewBag.Title = "OrderHistroy";
+    Layout = "~/Views/Shared/_MenuPageLayout.cshtml";
+}
+
+<h2>OrderHistroy</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItems)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MenuItems)
+        </td>
+    </tr>
+}
+
+</table>

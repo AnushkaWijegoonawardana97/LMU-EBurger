@@ -24,7 +24,7 @@ namespace LMU_EBurger.Controllers
         }
 
         // EXPORTING THE ENTITY MODEL
-        private readonly EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
+        private readonly EBurgerAppDBEntities1 DB = new EBurgerAppDBEntities1();
 
         // ==================== Categories ====================
 
@@ -259,6 +259,11 @@ namespace LMU_EBurger.Controllers
             }
         }
 
+        public ActionResult Orders()
+        {
+            return View(DB.Orders.ToList());
+        }
+
         // ==================== Admin Users ====================
 
         // GET : Create Category View
@@ -273,6 +278,13 @@ namespace LMU_EBurger.Controllers
         public ActionResult AdminAccounts()
         {
             return View(DB.AdminUsers.ToList());
+        }
+
+        // GET : CATEGORY LIST
+        [HttpGet]
+        public ActionResult CustomerAccounts()
+        {
+            return View(DB.Customers.ToList());
         }
 
         // POST : Save Category Recordes To The Database Categories File
