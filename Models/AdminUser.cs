@@ -27,6 +27,7 @@ namespace LMU_EBurger.Models
         public string AccessLevel { get; set; }
         public string ProfileImage { get; set; }
 
+
         public virtual User User { get; set; }
     }
 }

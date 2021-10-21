@@ -8,7 +8,7 @@
 <div id="register">
     <aside>
         <figure>
-            <a href="index.html"><img src="~/Content/img/logo_sticky.svg" width="140" height="35" alt=""></a>
+            <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/logo_sticky.svg" width="140" height="35" alt=""></a>
         </figure>
         <div class="mt-4"></div>
         @using (Html.BeginForm("NewRegistration", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -83,7 +83,7 @@
 
             <div id="pass-info" class="clearfix"></div>
             <input type="submit" value="Register Now!" class="btn_1 gradient full-width" />
-            <div class="text-center mt-2"><small>Already have an acccount? <strong><a href="#0">Sign In</a></strong></small></div>
+            <div class="text-center mt-2"><small>Already have an acccount? <strong><a href="@Url.Action("Login", "Home")">Sign In</a></strong></small></div>
         }
         <div class="copy">© 2021 E-Burger</div>
     </aside>

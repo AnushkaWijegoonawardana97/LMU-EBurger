@@ -6,12 +6,12 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
+
 namespace LMU_EBurger.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly EBurgerAppDBEntities DB = new EBurgerAppDBEntities();
-
+        private readonly EBurgerAppDBEntities1 DB = new EBurgerAppDBEntities1();
 
         public ActionResult Index()
         {
@@ -56,6 +56,54 @@ namespace LMU_EBurger.Controllers
         }
 
 
+        [HttpPost]
+        [ValidateInput(true)]
+        public ActionResult CreateNewOrder(Order order)
+        {
+            
+            Order order1 = new Order
+            {
+                OrderType = order.OrderType,
+                CreateAt = @DateTime.Today.ToString("D"),
+                SubTotal = "580",
+                DeliveryFee = "100",
+                Total = "600",
+                OrderStatus = "Order Confirmed",
+                CustomerID = order.CustomerID,
+                MenuItems = "1 x 2 |",
+            };
+            DB.Orders.Add(order1);
+            DB.SaveChanges();
+
+            OrderDelivery orderDelivery = new OrderDelivery
+            {
+                OrderID = order1.OrderID,
+                FullAddress = order.FullAddress,
+                District = order.District,
+                City = order.City,
+                ZIpCode = order.ZipCode,
+            };
+            DB.OrderDeliveries.Add(orderDelivery);
+            DB.SaveChanges();
+
+            Session["Cart"] = null;
+
+            return RedirectToAction("OrderConfirmed", "Home");
+        }
+
+        // GET : CATEGORY LIST
+        [HttpGet]
+        public ActionResult OrderHistroy()
+        {
+            return View(DB.Orders.ToList());
+        }
+
+        public ActionResult OrderConfirmed()
+        {
+            return View();
+        }
+
+
         public ActionResult Menu()
         {
             dynamic menumodel = new ExpandoObject();
@@ -63,7 +111,7 @@ namespace LMU_EBurger.Controllers
             menumodel.Menus = GetMenus();
             return View(menumodel);
         }
-
+        
         public ActionResult MenuDetails(int id)
         {
             using (DB)
@@ -78,7 +126,7 @@ namespace LMU_EBurger.Controllers
             if(Session["Cart"] == null)
             {
                 List<CartItem> cartItems = new List<CartItem>();
-                cartItems.Add(new CartItem { Menu = DB.Menus.Where(Menu => Menu.MenuID == MenuID).FirstOrDefault(), Quantity = 1 });
+                cartItems.Add(new CartItem { Menu = DB.Menus.Where(Menu => Menu.MenuID == MenuID).FirstOrDefault(), Quantity = 1  });
                 Session["Cart"] = cartItems;
             }
             else
@@ -166,6 +214,11 @@ namespace LMU_EBurger.Controllers
                     Session["UserId"] = user.UserID.ToString();
                     Session["Username"] = user.Username;
                     Session["AccessLevel"] = user.AccessLevel;
+                    if (Session["AccessLevel"].Equals("Customer"))
+                    {
+                        Session["CustomerID"] = DB.Customers.Where(Customer => Customer.UserId.Equals(user.UserID)).FirstOrDefault().CustomerID;
+                    }
+
 
                     if (Session["AccessLevel"].Equals("Customer"))
                     {
@@ -221,6 +274,10 @@ namespace LMU_EBurger.Controllers
                         Session["UserId"] = obj.UserID.ToString();
                         Session["Username"] = obj.Username;
                         Session["AccessLevel"] = obj.AccessLevel;
+                        if(Session["AccessLevel"].Equals("Customer"))
+                        {
+                            Session["CustomerID"]  = DB.Customers.Where(Customer => Customer.UserId.Equals(obj.UserID)).FirstOrDefault().CustomerID;
+                        }
 
                         if (Session["AccessLevel"].Equals("Customer"))
                         {

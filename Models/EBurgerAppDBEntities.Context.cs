@@ -13,10 +13,10 @@ namespace LMU_EBurger.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EBurgerAppDBEntities : DbContext
+    public partial class EBurgerAppDBEntities1 : DbContext
     {
-        public EBurgerAppDBEntities()
-            : base("name=EBurgerAppDBEntities")
+        public EBurgerAppDBEntities1()
+            : base("name=EBurgerAppDBEntities1")
         {
         }
     
@@ -24,17 +24,7 @@ namespace LMU_EBurger.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        internal void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void DeleteCategory(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+    
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }

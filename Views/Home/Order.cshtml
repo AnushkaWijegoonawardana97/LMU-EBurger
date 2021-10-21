@@ -1,76 +1,125 @@
 ﻿@using LMU_EBurger.Models;
 @model LMU_EBurger.Models.Order
 
-
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_MenuPageLayout.cshtml";
 }
 
 <main class="bg_gray">
-
     <div class="container margin_60_20">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">
                 <div class="box_order_form">
                     <div class="head">
                         <div class="title">
-                            <h3>Personal Details</h3>
+                            <h3>Order Details Details</h3>
                         </div>
                     </div>
+                    @{
+                        Random rnd = new Random();
+                        int deliveryValue = rnd.Next(100, 300);
+                    }
                     <!-- /head -->
-                    <div class="main">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.OrderType)
-                            @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.OrderType, "", new { @class = "text-danger" })
+                <div class="main">
+                    @using (Html.BeginForm("CreateNewOrder", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        // Hidden Fiels Related To Placing The Order
+                        <div class="form-group d-none">
+                            @Html.LabelFor(model => model.CustomerID, "Customer ID")
+                            @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control", @placeholder = Session["CustomerID"], @Value = @Session["CustomerID"] } })
+                            @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                         </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CreateAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.CreateAt, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CreateAt, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.SubTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.SubTotal, new { htmlAttributes = new { @class = "form-control" } })
+                        if (Session["Cart"] != null)
+                        {
+                            List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                            var total = cartItems.Sum(item => Int64.Parse(item.Menu.Price) * item.Quantity);
+                            <div class="form-group d-none">
+                                @Html.LabelFor(model => model.SubTotal, "SubTotal")
+                                @Html.EditorFor(model => model.SubTotal, new { htmlAttributes = new { @class = "form-control", @placeholder = @total, @Value = @total, disabled = "disabled" } })
                                 @Html.ValidationMessageFor(model => model.SubTotal, "", new { @class = "text-danger" })
                             </div>
+                        }
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.DeliveryFee, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.DeliveryFee, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.DeliveryFee, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="form-group d-none">
+                            @Html.LabelFor(model => model.DeliveryFee, "DeliveryFee")
+                            @Html.EditorFor(model => model.DeliveryFee, new { htmlAttributes = new { @class = "form-control", @placeholder = 100, @Value = 100, disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.DeliveryFee, "", new { @class = "text-danger" })
+                        </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.OrderStatus, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.OrderStatus, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
-                                </div>
+                        if (Session["Cart"] != null)
+                        {
+                            List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                            var NetTotoal = cartItems.Sum(item => Int64.Parse(item.Menu.Price) * item.Quantity) + deliveryValue;
+                            <div class="form-group d-none">
+                                @Html.LabelFor(model => model.Total, "Total")
+                                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @placeholder = NetTotoal, @Value = @NetTotoal, disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
                             </div>
                         }
-                    </div>
+
+
+                        <div class="form-group d-none">
+                            @Html.LabelFor(model => model.OrderStatus, "OrderStatus")
+                            @Html.EditorFor(model => model.OrderStatus, new { htmlAttributes = new { @class = "form-control", @placeholder = "Order Placed", @Value = "Order Placed" } })
+                            @Html.ValidationMessageFor(model => model.OrderStatus, "", new { @class = "text-danger" })
+                        </div>
+
+                        if (Session["Cart"] != null)
+                        {
+                            string menuItems = "";
+                            foreach (CartItem item in (List<CartItem>)Session["Cart"])
+                            {
+                                menuItems += @item.Menu.MenuID.ToString() + " x " + @item.Quantity.ToString() + " | ";
+                            }
+                            <div class="form-group d-none">
+                                @Html.LabelFor(model => model.MenuItems, "MenuItems")
+                                @Html.EditorFor(model => model.MenuItems, new { htmlAttributes = new { @class = "form-control", @placeholder = @menuItems, @Value = @menuItems } })
+                                @Html.ValidationMessageFor(model => model.MenuItems, "", new { @class = "text-danger" })
+                            </div>
+                        }
+
+
+                        <div class="form-group ">
+                            @Html.LabelFor(model => model.OrderType, "Order Type")
+                            @Html.DropDownListFor(model => model.OrderType, new List<SelectListItem> {
+                                new SelectListItem {Text = "Delivery", Value = "Delivery", Selected=true},
+                                new SelectListItem {Text = "Take away", Value = "Take away"}
+                            }, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FullAddress, "Full Address")
+                            @Html.EditorFor(model => model.FullAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Full Address" } })
+                            @Html.ValidationMessageFor(model => model.FullAddress, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.District, "District")
+                            @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "District" } })
+                            @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.City, "City")
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ZipCode, "ZipCode")
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "ZipCode" } })
+                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Order Now" class="btn_1 gradient full-width mb_5 mt-4" />
+                        </div>
+                    }
+                </div>
                 </div>
                 <!-- /box_order_form -->
             </div>
@@ -87,6 +136,7 @@
                             <li>Date<span>@DateTime.Today.ToString("D")</span></li>
                             <li>Hour<span>@DateTime.Now.ToString("T")</span></li>
                         </ul>
+
                         <hr>
                         <ul class="clearfix">
                             @if (Session["Cart"] != null)
@@ -116,10 +166,21 @@
                                 <li>Subtotal<span>00.00 LKR</span></li>
                             }
 
-                            <li>Delivery fee<span>$10</span></li>
-                            <li class="total">Total<span>$66</span></li>
+                            <li>Delivery fee<span>100.00 LKR</span></li>
+
+                            @if (Session["Cart"] != null)
+                            {
+                                List<CartItem> cartItems = (List<CartItem>)Session["Cart"];
+                                var NetTotoal = cartItems.Sum(item => Int64.Parse(item.Menu.Price) * item.Quantity) + 100;
+                                <li class="total">Total<span>@NetTotoal.00 LKR</span></li>
+                            }
+                            else
+                            {
+                                <li class="total">Total<span>100.00 LKR</span></li>
+                            }
+                            
                         </ul>
-                        <a href="confirm.html" class="btn_1 gradient full-width mb_5">Order Now</a>
+                       
                         <div class="text-center"><small>Or Call Us at <strong>0432 48432854</strong></small></div>
                     </div>
                 </div>
